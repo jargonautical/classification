@@ -15,7 +15,7 @@
 
 <body>
   <img src="img/learning-72-Pink-300px.png" class="logo"/>
-  <h3>Building a simple decision tree<br/><span style="font-size: 0.6em;">( <a style="text-decoration:underline;" href="" onClick="viewInstructions()">View Instructions</a> | <a id="groupcsv" style="text-decoration:underline;" href="data/csvs/Group_1.csv">Download card data (csv)</a> | <a id="grouppdf" style="text-decoration:underline;" href="data/Group_1.pdf">Download cards (pdf)</a> )</span></h3>
+  <h3>Build and test your own decision tree model<br/><span style="font-size: 0.6em;">( <a style="text-decoration:underline;" href="" onClick="viewInstructions()">View Instructions</a> | <a id="groupcsv" style="text-decoration:underline;" href="data/csvs/Group_1.csv">Download card data (csv)</a> | <a id="grouppdf" style="text-decoration:underline;" href="data/Group_1.pdf">Download cards (pdf)</a> )</span></h3>
   <!-- main flex container -->
   <!-- cards -->
   <div id="cards-wrapper">
@@ -36,6 +36,13 @@
   </div>
   
     <div class="invisbox-big" id="decision-tree-wrapper">
+    <div class="switch-wrapper" style="text-align: right;">
+    <span style="color:black;">Enable drag</span>
+    <label class="switch" value="Enable Drag">
+      <input id="myCheck" type="checkbox" onclick="toggleDrag()">
+      <span class="slider round"></span>
+    </label>
+    <div>
     <div id="canvas" class="dropzone" style="width: 100%; height: 100%; margin: auto;">
       <div style="margin: auto;">
         <svg style="display:none;">
@@ -56,7 +63,16 @@
               <div class="invisbox-tiny">
               </div>
               <div class="invisbox-tiny">
-                <input type="text" placeholder="factor1" id="factor1" name="factor1"><br>
+                <select id="factor1" name="factor1">
+                  <option value="" disabled selected>Select factor</option>
+                  <option value="Bathrooms">Bathrooms</option>
+                  <option value="Bedrooms">Bedrooms</option>
+                  <option value="Year built">Year built</option>
+                  <option value="Elevation">Elevation</option>
+                  <option value="Square Footage">Square Footage</option>
+                  <option value="Price">Price</option>
+                  <option value="Price per sqft">Price per sqft</option>
+                </select>
               </div>
               <div class="invisbox-tiny">
                 <img src="../classification/elements/decision.svg" width="100%"/>
@@ -68,8 +84,9 @@
             <div class="flex-container">
             <div class="invisbox-tiny">
             </div>
-            <div class="invisbox-tiny">
-              <input type="text" placeholder="condition1a" id="condition1A" name="condition1A"><br>
+            <div class="invisbox-tiny condition-left">
+              <label for="condition1a">&lt;=</label>
+              <input type="text" placeholder="condition1a" id="condition1a" name="condition1a" style="max-width: 70%;">
             </div>
             <div class="invisbox-tiny">
               <img src="../classification/elements/neat-arrow-left.svg" width="100%"/>
@@ -79,8 +96,9 @@
             <div class="invisbox-tiny">
               <img src="../classification/elements/neat-arrow-right.svg" width="100%"/>
             </div>
-            <div class="invisbox-tiny">
-              <input type="text" placeholder="condition1b" id="condition1B" name="condition1B"><br>
+            <div class="invisbox-tiny condition-right">
+              <label for="condition1b" style="font-size: 1.4em;">&gt;</label>
+              <input disabled type="text" placeholder="condition1b" id="condition1b" name="condition1b" style="max-width: 70%; background-color: silver;">
             </div>
             <div class="invisbox-tiny">
             </div>
@@ -111,7 +129,16 @@
         <!-- ROW 4 -->
           <div class="flex-container">
           <div class="invisbox-tiny">
-            <input type="text" placeholder="factor2a" id="factor2A" name="factor2A"><br>
+            <select id="factor2a" name="factor2b">
+                  <option value="" disabled selected>Select factor (optional)</option>
+                  <option value="Bathrooms">Bathrooms</option>
+                  <option value="Bedrooms">Bedrooms</option>
+                  <option value="Year built">Year built</option>
+                  <option value="Elevation">Elevation</option>
+                  <option value="Square Footage">Square Footage</option>
+                  <option value="Price">Price</option>
+                  <option value="Price per sqft">Price per sqft</option>
+            </select>
           </div>
           <div class="invisbox-tiny">
             <img src="../classification/elements/decision.svg" width="100%"/>
@@ -121,7 +148,16 @@
           <div class="invisbox-tiny">
           </div>
           <div class="invisbox-tiny">
-            <input type="text" placeholder="factor2b" id="factor2B" name="factor2B"><br>
+            <select id="factor2b" name="factor2b">
+                  <option value="" disabled selected>Select factor (optional)</option>
+                  <option value="Bathrooms">Bathrooms</option>
+                  <option value="Bedrooms">Bedrooms</option>
+                  <option value="Year built">Year built</option>
+                  <option value="Elevation">Elevation</option>
+                  <option value="Square Footage">Square Footage</option>
+                  <option value="Price">Price</option>
+                  <option value="Price per sqft">Price per sqft</option>
+            </select>
           </div>
           <div class="invisbox-tiny">
             <img src="../classification/elements/decision.svg" width="100%"/>
@@ -152,23 +188,27 @@
       </div>
       <!-- ROW 6 -->
       <div class="flex-container">
-      <div class="invisbox-tiny">
-        <input type="text" placeholder="condition2aa" id="condition2AA" name="condition2AA"><br>
+      <div class="invisbox-tiny condition">
+        <label for="condition2aa">&lt;=</label>
+        <input type="text" placeholder="condition2aa" id="condition2aa" name="condition2aa" style="max-width: 70%;">
       </div>
       <div class="invisbox-tiny">
       </div>
-      <div class="invisbox-tiny">
-        <input type="text" placeholder="condition2ab" id="condition2AB" name="condition2AB"><br>
+      <div class="invisbox-tiny condition">
+        <label for="condition2ab">&gt;</label>
+        <input disabled type="text" placeholder="condition2ab" id="condition2ab" name="condition2ab" style="max-width: 70%; background-color: silver">
       </div>
       <div class="invisbox-tiny">
       </div>
-      <div class="invisbox-tiny">
-        <input type="text" placeholder="condition2ba" id="condition2BA" name="condition2BA"><br>
+      <div class="invisbox-tiny condition">
+        <label for="condition2ba">&lt;=</label>
+        <input type="text" placeholder="condition2ba" id="condition2ba" name="condition2ba" style="max-width: 70%;">
       </div>
       <div class="invisbox-tiny">
       </div>
-      <div class="invisbox-tiny">
-        <input type="text" placeholder="condition2bb" id="condition2BB" name="condition2BB"><br>
+      <div class="invisbox-tiny condition">
+        <label for="condition2bb">&gt;</label>
+        <input disabled type="text" placeholder="condition2bb" id="condition2bb" name="condition2bb" style="max-width: 70%; background-color: silver">
       </div>
     </div>
     <!-- ROW 7 -->
@@ -248,8 +288,11 @@
     getBlueCards(group,"blue");
     document.getElementById("groupcsv").href="data/csvs/Group_" + group + ".csv"; 
     document.getElementById("grouppdf").href="data/pdfs/Group_" + group + ".pdf"; 
+
+    $('#condition1a').on('change', onchange);
+    $('#condition2aa').on('change', onchange);
+    $('#condition2ba').on('change', onchange);
   });
 </script>
-
 
 </html>
